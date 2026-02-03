@@ -22,17 +22,22 @@ signed main() {
             else if (itest == 2) {
                 sort(a + 1,a + n + 1,greater<double>());
             }
+            inp << n << "\n";
+            for (int i = 1; i <= n; i++) {
+                if (i < n) inp << a[i] << " ";
+                else inp << a[i] << "\n";
+            }
         }
         else {
             int l = -1000 * 1000, r = 1000 * 1000;
             uniform_int_distribution<int> dis(l,r);
             for (int i = 1; i <= n; i++)
                 a[i] = dis(rng);
-        }
-        inp << n << "\n";
-        for (int i = 1; i <= n; i++) {
-            if (i < n) inp << a[i] << " ";
-            else inp << a[i] << "\n";
+            inp << n << "\n";
+            for (int i = 1; i <= n; i++) {
+                if (i < n) inp << (int)a[i] << " ";
+                else inp << (int)a[i] << "\n";
+            }
         }
         inp.close();
     }
