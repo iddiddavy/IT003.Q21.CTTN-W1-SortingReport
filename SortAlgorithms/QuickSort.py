@@ -1,26 +1,5 @@
 import time
-import random
-
-def QuickSort(a, l, r):
-    pivot_idx = (l + r) // 2
-    pivot = a[pivot_idx]
-    i = l
-    j = r
-    while (i < j):
-        while (a[i] < pivot):
-            i = i + 1
-        while (a[j] > pivot):
-            j = j - 1
-        if (i <= j):
-            tam = a[i]
-            a[i] = a[j]
-            a[j] = tam
-            i = i + 1
-            j = j - 1
-    if (i < r):
-        QuickSort(a,i,r)
-    if (l < j):
-        QuickSort(a,l,j)
+import numpy as np
 
 avg = 0
 for i in range(1,11):
@@ -30,11 +9,11 @@ for i in range(1,11):
     s = f.readline()
     a = []
     if (i <= 5):
-        a = list(map(float,s.split()))
+        a = np.array(list(map(float,s.split())), dtype=np.float32)
     else:
-        a = list(map(int,s.split()))
+        a = np.array(list(map(int,s.split())), dtype=np.int32)
     start = time.perf_counter()
-    QuickSort(a,0,len(a) - 1)
+    a = np.sort(a,kind = 'quicksort')
     elapsed = time.perf_counter()
     f.close()
     f = open(file_name + ".out",mode = 'w')
@@ -43,6 +22,6 @@ for i in range(1,11):
         f.write(" ")
     f.close()
     avg = avg + (elapsed-start)*1000
-    print("Done!",round((elapsed-start)*1000,4),"ms")
+    print(a == sorted(a),"Done!",round((elapsed-start)*1000,4),"ms")
 
 print("Average:",round(avg / 10.0,4))
